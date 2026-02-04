@@ -12,9 +12,9 @@ const sadCat = [
 
 const blackmail = [
   "Please",
-  "I'm begging you",
-  "I'm crying",
-  "I'm sad",
+  "Don't do me like dis",
+  "Ima Cry",
+  "Really? Its a sad life",
   "HUHUHUHU",
   "Please Say Yes",
   "I'm gonna cry",

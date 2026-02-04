@@ -14,7 +14,6 @@
     <meta name="web_author" content="Kush" />
     <meta name="reply-to" content="" />
     <meta name="rating" content="general" />
-
     <meta name="og:title" content="There is a Surprise" />
     <meta name="og:description" content="There is a surprise." />
     <meta name="og:image" content="https://i.ibb.co/k6xD4nM/New-Project.jpg" />
@@ -54,9 +53,7 @@
       </a>
     </div>
 
-    <h1 class="headerText" id="wedate">
-      Boots, wanna be My Valentine?? 🥺
-    </h1>
+    <h1 class="headerText" id="wedate">Boots, wanna be My Valentine?? 🥺</h1>
 
     <img
       class="image"
@@ -65,8 +62,8 @@
       id="mainImg"
     />
 
-    <!-- IMPORTANT: position: relative lets the No button move inside this box -->
-    <div class="flex" id="btns" style="position: relative;">
+    <!-- IMPORTANT: relative positioning lets the No button move inside this container -->
+    <div class="flex" id="btns" style="position: relative; min-height: 140px;">
       <button
         class="button"
         id="yes"
@@ -82,6 +79,7 @@
         class="button"
         id="noBtn"
         onmouseenter="moveNoButton(); angry()"
+        onmouseleave="normal()"
         onclick="moveNoButton(); no()"
       >
         No 😭
@@ -146,7 +144,6 @@
         <source src="./resources/happy.mp3" type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
-
       <div class="model-content">
         <p class="modelText" id="modelText2">I Love you 😘😘</p>
         <img
@@ -172,7 +169,6 @@
         <source src="./resources/sad.mp3" type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
-
       <div class="model-content">
         <p class="modelText" id="modelText">Please</p>
         <img
@@ -182,7 +178,8 @@
           alt="heyy"
         />
 
-        <div class="flex" style="position: relative;">
+        <!-- Make this relative too, so modal No can move if needed -->
+        <div class="flex" style="position: relative; min-height: 140px;">
           <button
             class="button"
             id="yes"
@@ -193,11 +190,12 @@
             Yes 🥰
           </button>
 
-          <!-- Modal No button: different ID so it doesn't break the main No -->
+          <!-- Modal No button: different ID -->
           <button
             class="button"
             id="noModalBtn"
             onmouseenter="moveNoButton(); angry()"
+            onmouseleave="normal()"
             onclick="moveNoButton(); no()"
           >
             No 😭

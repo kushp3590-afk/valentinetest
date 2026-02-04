@@ -11,6 +11,7 @@ const sadCat = [
 ];
 
 const blackmail = [
+  "Hey…",
   "Boots pls 😭",
   "Don't do me like dis",
   "I made this with love 🥺",
@@ -90,7 +91,7 @@ function no() {
     const modelText = document.getElementById("modelText");
 
     if (modelImage) modelImage.src = sadCat[Math.floor(Math.random() * sadCat.length)];
-    if (modelText) modelText.innerText = blackmail[Math.floor(Math.random() * blackmail.length)];
+    if (modelText) modelText.innerText = blackmail[Math.min(counter - 1, blackmail.length - 1)];
   }, 100);
 }
 

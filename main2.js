@@ -1,3 +1,5 @@
+console.log("main2.js loaded ✅");
+
 document.addEventListener("DOMContentLoaded", function () {
   // Random heart positions (your existing thing)
   var images = document.querySelectorAll(".image1");

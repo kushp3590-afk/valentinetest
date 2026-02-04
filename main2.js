@@ -120,7 +120,7 @@ function yes() {
 
     if (wedate) {
       wedate.innerText =
-        "YAYY, Thanks for being my valentine for the past 5 years, and the years to come. I lub you ❤️😘";
+        "YAYY, Thanks for being my valentine for the past 5 years, and the years to come. I lub you 💗. Lets go for a nice dinner date to celebrate 😘 ";
     }
 
     window.open("index1.html", "_blank");

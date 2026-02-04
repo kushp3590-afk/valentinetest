@@ -5,26 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Boots, wanna be My Valentine??</title>
     <link rel="stylesheet" href="style2.css" />
-    <meta name="description" content="There is a surprise." />
-    <meta name="keywords" content="Valentine, Love, Surprise" />
-    <meta name="author" content="Kush" />
-    <meta name="robots" content="index, follow" />
-    <meta name="revisit-after" content="3 days" />
-    <meta name="language" content="English" />
-    <meta name="web_author" content="Kush" />
-    <meta name="reply-to" content="" />
-    <meta name="rating" content="general" />
-    <meta name="og:title" content="There is a Surprise" />
-    <meta name="og:description" content="There is a surprise." />
-    <meta name="og:image" content="https://i.ibb.co/k6xD4nM/New-Project.jpg" />
-    <meta name="og:url" content="https://prashant-valentine.netlify.app/" />
-    <meta name="og:site_name" content="There is a Surprise" />
-    <meta name="og:locale" content="en_US" />
-    <meta name="og:type" content="website" />
-    <meta name="og:author" content="Prashant" />
-    <meta name="og:reply-to" content="" />
-    <meta name="og:web_author" content="Prashant" />
-    <meta name="og:rating" content="general" />
   </head>
 
   <body>
@@ -39,11 +19,7 @@
         >
       </p>
 
-      <a
-        rel="noopener"
-        target="_blank"
-        href="https://github.com/junayed-hasan/"
-      >
+      <a rel="noopener" target="_blank" href="https://github.com/junayed-hasan/">
         <img
           class="image2"
           src="https://logodix.com/logo/1205168.png"
@@ -62,87 +38,28 @@
       id="mainImg"
     />
 
-    <!-- IMPORTANT: relative positioning lets the No button move inside this container -->
+    <!-- key: relative container so No can jump around -->
     <div class="flex" id="btns" style="position: relative; min-height: 140px;">
-      <button
-        class="button"
-        id="yes"
-        onmouseenter="happy()"
-        onmouseleave="normal()"
-        onclick="yes()"
-      >
-        Yes 🥰
-      </button>
-
-      <!-- Main No button: unique ID -->
-      <button
-        class="button"
-        id="noBtn"
-        onmouseenter="moveNoButton(); angry()"
-        onmouseleave="normal()"
-        onclick="moveNoButton(); no()"
-      >
-        No 😭
-      </button>
+      <button class="button" id="yesBtn">Yes 🥰</button>
+      <button class="button" id="noBtn">No 😭</button>
     </div>
 
     <div class="absImages" id="absImg">
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
-      <img
-        class="image1"
-        src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true"
-        alt="heyy"
-      />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
+      <img class="image1" src="https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true" alt="heyy" />
     </div>
 
     <div class="model" id="model2">
       <audio id="happyMusic" style="opacity: 0" controls loop>
         <source src="./resources/happy.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
       </audio>
       <div class="model-content">
         <p class="modelText" id="modelText2">I Love you 😘😘</p>
@@ -152,22 +69,13 @@
           src="https://takelessons.com/blog/wp-content/uploads/2013/07/happy-cat.gif"
           alt="heyy"
         />
-        <button
-          class="button"
-          id="yes"
-          onmouseenter="happy()"
-          onmouseleave="normal()"
-          onclick="ly2()"
-        >
-          Love You Too 🥰
-        </button>
+        <button class="button" id="loveYouTooBtn">Love You Too 🥰</button>
       </div>
     </div>
 
     <div id="model" class="model">
       <audio id="sadMusic" style="opacity: 0" controls loop>
         <source src="./resources/sad.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
       </audio>
       <div class="model-content">
         <p class="modelText" id="modelText">Please</p>
@@ -177,29 +85,9 @@
           src="https://media1.tenor.com/images/9413ffc5a11722a3cc456a88810750bd/tenor.gif?itemid=14193216"
           alt="heyy"
         />
-
-        <!-- Make this relative too, so modal No can move if needed -->
         <div class="flex" style="position: relative; min-height: 140px;">
-          <button
-            class="button"
-            id="yes"
-            onmouseenter="happy()"
-            onmouseleave="normal()"
-            onclick="yes()"
-          >
-            Yes 🥰
-          </button>
-
-          <!-- Modal No button: different ID -->
-          <button
-            class="button"
-            id="noModalBtn"
-            onmouseenter="moveNoButton(); angry()"
-            onmouseleave="normal()"
-            onclick="moveNoButton(); no()"
-          >
-            No 😭
-          </button>
+          <button class="button" id="yesModalBtn">Yes 🥰</button>
+          <button class="button" id="noModalBtn">No 😭</button>
         </div>
       </div>
     </div>

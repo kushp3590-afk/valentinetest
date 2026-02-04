@@ -134,5 +134,26 @@ function moveNoButton() {
   noBtn.style.left = randomX + "px";
   noBtn.style.top = randomY + "px";
 }
+function moveNoButton() {
+  // Prefer moving the main No button; if it doesn't exist, try the modal one
+  const btn = document.getElementById("noBtn") || document.getElementById("noModalBtn");
+  if (!btn) return;
+
+  // Move within its parent container if possible
+  const parent = btn.parentElement;
+  const parentRect = parent.getBoundingClientRect();
+  const btnRect = btn.getBoundingClientRect();
+
+  const padding = 10;
+  const maxX = Math.max(padding, parentRect.width - btnRect.width - padding);
+  const maxY = Math.max(padding, parentRect.height - btnRect.height - padding);
+
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+
+  btn.style.position = "absolute";
+  btn.style.left = randomX + "px";
+  btn.style.top = randomY + "px";
+}
 
   

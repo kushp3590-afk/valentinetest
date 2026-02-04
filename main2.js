@@ -11,13 +11,14 @@ const sadCat = [
 ];
 
 const blackmail = [
-  "Please",
+  "Boots pls 😭",
   "Don't do me like dis",
-  "Ima Cry",
+  "I made this with love 🥺",
   "Really? Its a sad life",
-  "HUHUHUHU",
+  "BOOOOTTSSS 😭",
   "Please Say Yes",
-  "I'm gonna cry",
+  "You can’t say no now",
+  "Okay this is getting personal"
 ];
 
 // ---------- STATE ----------

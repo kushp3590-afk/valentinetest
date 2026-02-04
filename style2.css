@@ -183,3 +183,5 @@ body {
   pointer-events: none;
 }
 
+#absImg, .absImages, .image1 { pointer-events: none; }
+#noBtn { z-index: 9999; }

@@ -185,29 +185,43 @@ function ly2() {
   if (model2) model2.style.display = "none";
 }
 
-// Moves whichever No button triggered the event
 function moveNoButton(btn) {
   if (!btn) return;
 
-  // try to keep it inside a useful container
-  const container = document.getElementById("btns") || btn.parentElement;
+  // Always move relative to the whole page
+  const padding = 20;
 
-  // ensure absolute positioning works
-  if (getComputedStyle(container).position === "static") {
-    container.style.position = "relative";
-  }
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
 
-  const containerRect = container.getBoundingClientRect();
   const btnRect = btn.getBoundingClientRect();
 
-  const padding = 10;
-  const maxX = Math.max(padding, containerRect.width - btnRect.width - padding);
-  const maxY = Math.max(padding, containerRect.height - btnRect.height - padding);
+  const maxX = viewportWidth - btnRect.width - padding;
+  const maxY = viewportHeight - btnRect.height - padding;
 
-  const randomX = Math.floor(Math.random() * maxX);
-  const randomY = Math.floor(Math.random() * maxY);
+  let randomX = Math.random() * maxX;
+  let randomY = Math.random() * maxY;
 
-  btn.style.position = "absolute";
+  // Prevent overlapping the YES button
+  const yesBtn = document.getElementById("yesBtn");
+  if (yesBtn) {
+    const yesRect = yesBtn.getBoundingClientRect();
+    const buffer = 80;
+
+    if (
+      randomX > yesRect.left - buffer &&
+      randomX < yesRect.right + buffer &&
+      randomY > yesRect.top - buffer &&
+      randomY < yesRect.bottom + buffer
+    ) {
+      randomX = Math.random() * maxX;
+      randomY = Math.random() * maxY;
+    }
+  }
+
+  btn.style.position = "fixed";
   btn.style.left = randomX + "px";
   btn.style.top = randomY + "px";
 }
+
+

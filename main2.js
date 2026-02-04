@@ -1,15 +1,5 @@
 console.log("main2.js loaded ✅");
 
-// ---------- GIFS ----------
-const mainHappy1 =
-  "https://github.com/NikhilMarko03/resources/blob/main/happy1.gif?raw=true";
-const mainHappy3 =
-  "https://github.com/NikhilMarko03/resources/blob/main/happy3.gif?raw=true";
-const mainSad1 =
-  "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
-const heartGif =
-  "https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true";
-
 // ---------- CONTENT ----------
 const sadCat = [
   "https://media1.tenor.com/images/9413ffc5a11722a3cc456a88810750bd/tenor.gif?itemid=14193216",
@@ -33,20 +23,22 @@ const blackmail = [
 // ---------- STATE ----------
 let counter = 0;
 
-// ---------- HELPERS ----------
-function randFrom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
+// ---------- VISUALS ----------
 function angry() {
   const images = document.querySelectorAll(".image1");
   const absImg = document.getElementById("absImg");
   const mainImg = document.getElementById("mainImg");
 
-  if (mainImg) mainImg.src = mainSad1;
+  if (mainImg) {
+    mainImg.src =
+      "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
+  }
   if (absImg) absImg.style.display = "flex";
 
-  images.forEach((img) => (img.src = mainSad1));
+  images.forEach((img) => {
+    img.src =
+      "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
+  });
 }
 
 function happy() {
@@ -54,10 +46,16 @@ function happy() {
   const absImg = document.getElementById("absImg");
   const mainImg = document.getElementById("mainImg");
 
-  if (mainImg) mainImg.src = mainHappy3;
+  if (mainImg) {
+    mainImg.src =
+      "https://github.com/NikhilMarko03/resources/blob/main/happy3.gif?raw=true";
+  }
   if (absImg) absImg.style.display = "flex";
 
-  images.forEach((img) => (img.src = heartGif));
+  images.forEach((img) => {
+    img.src =
+      "https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true";
+  });
 }
 
 function normal() {
@@ -65,9 +63,13 @@ function normal() {
   const mainImg = document.getElementById("mainImg");
 
   if (absImg) absImg.style.display = "none";
-  if (mainImg) mainImg.src = mainHappy1;
+  if (mainImg) {
+    mainImg.src =
+      "https://github.com/NikhilMarko03/resources/blob/main/happy1.gif?raw=true";
+  }
 }
 
+// ---------- ACTIONS ----------
 function no() {
   counter++;
 
@@ -86,8 +88,8 @@ function no() {
     const modelImage = document.getElementById("modelImg");
     const modelText = document.getElementById("modelText");
 
-    if (modelImage) modelImage.src = randFrom(sadCat);
-    if (modelText) modelText.innerText = randFrom(blackmail);
+    if (modelImage) modelImage.src = sadCat[Math.floor(Math.random() * sadCat.length)];
+    if (modelText) modelText.innerText = blackmail[Math.floor(Math.random() * blackmail.length)];
   }, 100);
 }
 
@@ -98,7 +100,6 @@ function yes() {
 
     const sadMusic = document.getElementById("sadMusic");
     if (sadMusic) sadMusic.pause();
-
     if (model) model.style.display = "none";
 
     const happyMusic = document.getElementById("happyMusic");
@@ -114,6 +115,7 @@ function yes() {
     const wedate = document.getElementById("wedate");
     const btns = document.getElementById("btns");
     if (btns) btns.style.display = "none";
+
     if (wedate) {
       wedate.innerText =
         "YAYY, Thanks for being my valentine for the past 5 years, and the years to come. I lub you ❤️😘";
@@ -121,9 +123,7 @@ function yes() {
 
     window.open("index1.html", "_blank");
   } else {
-    alert(
-      "Come on, don't be THAT nice, play around a bit to make my hard work worth it😉😘"
-    );
+    alert("Try pressing No a few times first 😘");
   }
 }
 
@@ -134,122 +134,101 @@ function ly2() {
   if (model) model.style.display = "none";
 }
 
-// ---------- NO BUTTON MOVEMENT (Option A) ----------
-// Key change vs your current version:
-// - Moves on mousemove too (so it ALWAYS escapes)
-// - Avoids Yes area with multiple retries
-function moveNoButton(btn) {
-  if (!btn) return;
+// ---------- ORBIT NO BUTTON (SIMPLE + ALWAYS MOVES) ----------
+let orbitAngle = 0;
+let orbitTimer = null;
 
-  const padding = 20;
-  const buffer = 140; // keep away from YES more aggressively
+function startOrbit() {
+  const noBtn = document.getElementById("noBtn");
+  if (!noBtn) return;
 
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
+  // keep it above background and clickable
+  noBtn.style.position = "fixed";
+  noBtn.style.zIndex = 9999;
 
-  const btnRect = btn.getBoundingClientRect();
-  const maxX = Math.max(0, viewportWidth - btnRect.width - padding);
-  const maxY = Math.max(0, viewportHeight - btnRect.height - padding);
+  // orbit settings
+  const radius = 140;          // size of the circle
+  const speed = 0.04;          // speed of orbit (bigger = faster)
+  const fps = 16;              // ~60fps would be 16ms
 
-  const yesBtn = document.getElementById("yesBtn");
-  const yesRect = yesBtn ? yesBtn.getBoundingClientRect() : null;
+  // clear if already running
+  if (orbitTimer) clearInterval(orbitTimer);
 
-  let x = 0;
-  let y = 0;
+  orbitTimer = setInterval(() => {
+    orbitAngle += speed;
 
-  for (let i = 0; i < 25; i++) {
-    x = Math.floor(Math.random() * (maxX + 1));
-    y = Math.floor(Math.random() * (maxY + 1));
+    // Orbit around YES button if it exists, otherwise around screen center
+    const yesBtn = document.getElementById("yesBtn");
+    let centerX, centerY;
 
-    if (!yesRect) break;
+    if (yesBtn) {
+      const yesRect = yesBtn.getBoundingClientRect();
+      centerX = yesRect.left + yesRect.width / 2;
+      centerY = yesRect.top + yesRect.height / 2;
+    } else {
+      centerX = window.innerWidth / 2;
+      centerY = window.innerHeight / 2;
+    }
 
-    const tooClose =
-      x > yesRect.left - buffer &&
-      x < yesRect.right + buffer &&
-      y > yesRect.top - buffer &&
-      y < yesRect.bottom + buffer;
+    const x = centerX + radius * Math.cos(orbitAngle);
+    const y = centerY + radius * Math.sin(orbitAngle);
 
-    if (!tooClose) break;
-  }
-
-  btn.style.position = "fixed";
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
-  btn.style.zIndex = 9999;
+    // keep it inside viewport-ish
+    noBtn.style.left = Math.max(10, Math.min(window.innerWidth - 10, x)) + "px";
+    noBtn.style.top = Math.max(10, Math.min(window.innerHeight - 10, y)) + "px";
+  }, fps);
 }
 
 // ---------- INIT ----------
 document.addEventListener("DOMContentLoaded", function () {
-  // Random heart positions
+  // random heart positions
   const images = document.querySelectorAll(".image1");
   images.forEach((img) => {
     img.style.top = Math.floor(Math.random() * window.innerHeight) + "px";
     img.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
   });
 
+  // wire buttons
   const yesBtn = document.getElementById("yesBtn");
   const noBtn = document.getElementById("noBtn");
   const yesModalBtn = document.getElementById("yesModalBtn");
   const noModalBtn = document.getElementById("noModalBtn");
   const loveYouTooBtn = document.getElementById("loveYouTooBtn");
 
-  // YES (main)
   if (yesBtn) {
     yesBtn.addEventListener("mouseenter", happy);
     yesBtn.addEventListener("mouseleave", normal);
     yesBtn.addEventListener("click", yes);
   }
 
-  // NO (main) - make it escape reliably
   if (noBtn) {
-    noBtn.addEventListener("mouseenter", (e) => {
-      moveNoButton(e.currentTarget);
-      angry();
-    });
-
-    // THIS is what makes it feel consistent: it runs when you try to chase it
-    noBtn.addEventListener("mousemove", (e) => {
-      moveNoButton(e.currentTarget);
-    });
-
+    // no hover required now, it moves anyway
+    noBtn.addEventListener("mouseenter", angry);
     noBtn.addEventListener("mouseleave", normal);
-
-    noBtn.addEventListener("click", (e) => {
-      moveNoButton(e.currentTarget);
-      no();
-    });
+    noBtn.addEventListener("click", no);
   }
 
-  // YES (modal)
   if (yesModalBtn) {
     yesModalBtn.addEventListener("mouseenter", happy);
     yesModalBtn.addEventListener("mouseleave", normal);
     yesModalBtn.addEventListener("click", yes);
   }
 
-  // NO (modal)
   if (noModalBtn) {
-    noModalBtn.addEventListener("mouseenter", (e) => {
-      moveNoButton(e.currentTarget);
-      angry();
-    });
-
-    noModalBtn.addEventListener("mousemove", (e) => {
-      moveNoButton(e.currentTarget);
-    });
-
+    noModalBtn.addEventListener("mouseenter", angry);
     noModalBtn.addEventListener("mouseleave", normal);
-
-    noModalBtn.addEventListener("click", (e) => {
-      moveNoButton(e.currentTarget);
-      no();
-    });
+    noModalBtn.addEventListener("click", no);
   }
 
-  // Love you too
   if (loveYouTooBtn) {
     loveYouTooBtn.addEventListener("mouseenter", happy);
     loveYouTooBtn.addEventListener("mouseleave", normal);
     loveYouTooBtn.addEventListener("click", ly2);
   }
+
+  // start orbiting immediately
+  startOrbit();
+
+  // keep orbit correct on resize
+  window.addEventListener("resize", startOrbit);
 });

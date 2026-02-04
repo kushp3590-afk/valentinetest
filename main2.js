@@ -1,106 +1,16 @@
 console.log("main2.js loaded ✅");
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Random heart positions (your existing thing)
-  var images = document.querySelectorAll(".image1");
-  function setRandomPosition(element) {
-    element.style.top = Math.floor(Math.random() * window.innerHeight) + "px";
-    element.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
-  }
-  images.forEach(function (image) {
-    setRandomPosition(image);
-  });
+// ---------- GIFS ----------
+const mainHappy1 =
+  "https://github.com/NikhilMarko03/resources/blob/main/happy1.gif?raw=true";
+const mainHappy3 =
+  "https://github.com/NikhilMarko03/resources/blob/main/happy3.gif?raw=true";
+const mainSad1 =
+  "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
+const heartGif =
+  "https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true";
 
-  // Wire up buttons (NO inline onclick attributes needed)
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-  const yesModalBtn = document.getElementById("yesModalBtn");
-  const noModalBtn = document.getElementById("noModalBtn");
-  const loveYouTooBtn = document.getElementById("loveYouTooBtn");
-
-  if (yesBtn) {
-    yesBtn.addEventListener("mouseenter", happy);
-    yesBtn.addEventListener("mouseleave", normal);
-    yesBtn.addEventListener("click", yes);
-  }
-
-  if (noBtn) {
-    noBtn.addEventListener("mouseenter", function (e) {
-      moveNoButton(e.currentTarget);
-      angry();
-    });
-    noBtn.addEventListener("mouseleave", normal);
-    noBtn.addEventListener("click", function (e) {
-      moveNoButton(e.currentTarget);
-      no();
-    });
-  }
-
-  if (yesModalBtn) {
-    yesModalBtn.addEventListener("mouseenter", happy);
-    yesModalBtn.addEventListener("mouseleave", normal);
-    yesModalBtn.addEventListener("click", yes);
-  }
-
-  if (noModalBtn) {
-    noModalBtn.addEventListener("mouseenter", function (e) {
-      moveNoButton(e.currentTarget);
-      angry();
-    });
-    noModalBtn.addEventListener("mouseleave", normal);
-    noModalBtn.addEventListener("click", function (e) {
-      moveNoButton(e.currentTarget);
-      no();
-    });
-  }
-
-  if (loveYouTooBtn) {
-    loveYouTooBtn.addEventListener("mouseenter", happy);
-    loveYouTooBtn.addEventListener("mouseleave", normal);
-    loveYouTooBtn.addEventListener("click", ly2);
-  }
-});
-
-function angry() {
-  var images = document.querySelectorAll(".image1");
-  var absImg = document.getElementById("absImg");
-  var mainImg = document.getElementById("mainImg");
-  if (mainImg) {
-    mainImg.src =
-      "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
-  }
-  if (absImg) absImg.style.display = "flex";
-  images.forEach(function (image) {
-    image.src =
-      "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
-  });
-}
-
-function happy() {
-  var images = document.querySelectorAll(".image1");
-  var absImg = document.getElementById("absImg");
-  var mainImg = document.getElementById("mainImg");
-  if (absImg) absImg.style.display = "flex";
-  if (mainImg) {
-    mainImg.src =
-      "https://github.com/NikhilMarko03/resources/blob/main/happy3.gif?raw=true";
-  }
-  images.forEach(function (image) {
-    image.src =
-      "https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true";
-  });
-}
-
-function normal() {
-  var absImg = document.getElementById("absImg");
-  var mainImg = document.getElementById("mainImg");
-  if (absImg) absImg.style.display = "none";
-  if (mainImg) {
-    mainImg.src =
-      "https://github.com/NikhilMarko03/resources/blob/main/happy1.gif?raw=true";
-  }
-}
-
+// ---------- CONTENT ----------
 const sadCat = [
   "https://media1.tenor.com/images/9413ffc5a11722a3cc456a88810750bd/tenor.gif?itemid=14193216",
   "https://emoji.gg/assets/emoji/5228_cat_cri.gif",
@@ -120,47 +30,84 @@ const blackmail = [
   "I'm gonna cry",
 ];
 
+// ---------- STATE ----------
 let counter = 0;
+
+// ---------- HELPERS ----------
+function randFrom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function angry() {
+  const images = document.querySelectorAll(".image1");
+  const absImg = document.getElementById("absImg");
+  const mainImg = document.getElementById("mainImg");
+
+  if (mainImg) mainImg.src = mainSad1;
+  if (absImg) absImg.style.display = "flex";
+
+  images.forEach((img) => (img.src = mainSad1));
+}
+
+function happy() {
+  const images = document.querySelectorAll(".image1");
+  const absImg = document.getElementById("absImg");
+  const mainImg = document.getElementById("mainImg");
+
+  if (mainImg) mainImg.src = mainHappy3;
+  if (absImg) absImg.style.display = "flex";
+
+  images.forEach((img) => (img.src = heartGif));
+}
+
+function normal() {
+  const absImg = document.getElementById("absImg");
+  const mainImg = document.getElementById("mainImg");
+
+  if (absImg) absImg.style.display = "none";
+  if (mainImg) mainImg.src = mainHappy1;
+}
 
 function no() {
   counter++;
-  let sadMusic = document.getElementById("sadMusic");
-  let happyMusic = document.getElementById("happyMusic");
+
+  const sadMusic = document.getElementById("sadMusic");
+  const happyMusic = document.getElementById("happyMusic");
   if (happyMusic) happyMusic.pause();
   if (sadMusic) sadMusic.play();
 
-  let model = document.getElementById("model");
+  const model = document.getElementById("model");
   if (!model) return;
 
   model.style.display = "none";
   setTimeout(() => {
     model.style.display = "flex";
+
     const modelImage = document.getElementById("modelImg");
     const modelText = document.getElementById("modelText");
-    if (modelImage) {
-      modelImage.src = sadCat[Math.floor(Math.random() * sadCat.length)];
-    }
-    if (modelText) {
-      modelText.innerText = blackmail[Math.floor(Math.random() * blackmail.length)];
-    }
+
+    if (modelImage) modelImage.src = randFrom(sadCat);
+    if (modelText) modelText.innerText = randFrom(blackmail);
   }, 100);
 }
 
 function yes() {
   if (counter >= 3) {
-    let model = document.getElementById("model2");
-    let model2 = document.getElementById("model");
-    let sadMusic = document.getElementById("sadMusic");
-    if (sadMusic) sadMusic.pause();
-    if (model2) model2.style.display = "none";
+    const model2 = document.getElementById("model2");
+    const model = document.getElementById("model");
 
-    let happyMusic = document.getElementById("happyMusic");
+    const sadMusic = document.getElementById("sadMusic");
+    if (sadMusic) sadMusic.pause();
+
+    if (model) model.style.display = "none";
+
+    const happyMusic = document.getElementById("happyMusic");
     if (happyMusic) happyMusic.play();
 
-    if (model) {
-      model.style.display = "none";
+    if (model2) {
+      model2.style.display = "none";
       setTimeout(() => {
-        model.style.display = "flex";
+        model2.style.display = "flex";
       }, 100);
     }
 
@@ -181,51 +128,128 @@ function yes() {
 }
 
 function ly2() {
-  let model = document.getElementById("model2");
-  let model2 = document.getElementById("model");
-  if (model) model.style.display = "none";
+  const model2 = document.getElementById("model2");
+  const model = document.getElementById("model");
   if (model2) model2.style.display = "none";
+  if (model) model.style.display = "none";
 }
 
+// ---------- NO BUTTON MOVEMENT (Option A) ----------
+// Key change vs your current version:
+// - Moves on mousemove too (so it ALWAYS escapes)
+// - Avoids Yes area with multiple retries
 function moveNoButton(btn) {
   if (!btn) return;
 
   const padding = 20;
+  const buffer = 140; // keep away from YES more aggressively
 
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
   const btnRect = btn.getBoundingClientRect();
-
   const maxX = Math.max(0, viewportWidth - btnRect.width - padding);
   const maxY = Math.max(0, viewportHeight - btnRect.height - padding);
 
   const yesBtn = document.getElementById("yesBtn");
   const yesRect = yesBtn ? yesBtn.getBoundingClientRect() : null;
 
-  const buffer = 100; // how far away from YES it must stay
-  let randomX = 0;
-  let randomY = 0;
+  let x = 0;
+  let y = 0;
 
-  // Try up to 15 times to find a spot not near YES
-  for (let i = 0; i < 15; i++) {
-    randomX = Math.floor(Math.random() * (maxX + 1));
-    randomY = Math.floor(Math.random() * (maxY + 1));
+  for (let i = 0; i < 25; i++) {
+    x = Math.floor(Math.random() * (maxX + 1));
+    y = Math.floor(Math.random() * (maxY + 1));
 
     if (!yesRect) break;
 
     const tooClose =
-      randomX > yesRect.left - buffer &&
-      randomX < yesRect.right + buffer &&
-      randomY > yesRect.top - buffer &&
-      randomY < yesRect.bottom + buffer;
+      x > yesRect.left - buffer &&
+      x < yesRect.right + buffer &&
+      y > yesRect.top - buffer &&
+      y < yesRect.bottom + buffer;
 
     if (!tooClose) break;
   }
 
   btn.style.position = "fixed";
-  btn.style.left = randomX + "px";
-  btn.style.top = randomY + "px";
-  btn.style.zIndex = 999; // stay clickable above background
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+  btn.style.zIndex = 9999;
 }
 
+// ---------- INIT ----------
+document.addEventListener("DOMContentLoaded", function () {
+  // Random heart positions
+  const images = document.querySelectorAll(".image1");
+  images.forEach((img) => {
+    img.style.top = Math.floor(Math.random() * window.innerHeight) + "px";
+    img.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+  });
+
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const yesModalBtn = document.getElementById("yesModalBtn");
+  const noModalBtn = document.getElementById("noModalBtn");
+  const loveYouTooBtn = document.getElementById("loveYouTooBtn");
+
+  // YES (main)
+  if (yesBtn) {
+    yesBtn.addEventListener("mouseenter", happy);
+    yesBtn.addEventListener("mouseleave", normal);
+    yesBtn.addEventListener("click", yes);
+  }
+
+  // NO (main) - make it escape reliably
+  if (noBtn) {
+    noBtn.addEventListener("mouseenter", (e) => {
+      moveNoButton(e.currentTarget);
+      angry();
+    });
+
+    // THIS is what makes it feel consistent: it runs when you try to chase it
+    noBtn.addEventListener("mousemove", (e) => {
+      moveNoButton(e.currentTarget);
+    });
+
+    noBtn.addEventListener("mouseleave", normal);
+
+    noBtn.addEventListener("click", (e) => {
+      moveNoButton(e.currentTarget);
+      no();
+    });
+  }
+
+  // YES (modal)
+  if (yesModalBtn) {
+    yesModalBtn.addEventListener("mouseenter", happy);
+    yesModalBtn.addEventListener("mouseleave", normal);
+    yesModalBtn.addEventListener("click", yes);
+  }
+
+  // NO (modal)
+  if (noModalBtn) {
+    noModalBtn.addEventListener("mouseenter", (e) => {
+      moveNoButton(e.currentTarget);
+      angry();
+    });
+
+    noModalBtn.addEventListener("mousemove", (e) => {
+      moveNoButton(e.currentTarget);
+    });
+
+    noModalBtn.addEventListener("mouseleave", normal);
+
+    noModalBtn.addEventListener("click", (e) => {
+      moveNoButton(e.currentTarget);
+      no();
+    });
+  }
+
+  // Love you too
+  if (loveYouTooBtn) {
+    loveYouTooBtn.addEventListener("mouseenter", happy);
+    loveYouTooBtn.addEventListener("mouseleave", normal);
+    loveYouTooBtn.addEventListener("click", ly2);
+  }
+});

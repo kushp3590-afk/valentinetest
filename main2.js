@@ -185,29 +185,45 @@ function ly2() {
   if (model2) model2.style.display = "none";
 }
 
-// Moves whichever No button triggered the event
 function moveNoButton(btn) {
   if (!btn) return;
 
-  // try to keep it inside a useful container
-  const container = document.getElementById("btns") || btn.parentElement;
+  const padding = 20;
 
-  // ensure absolute positioning works
-  if (getComputedStyle(container).position === "static") {
-    container.style.position = "relative";
-  }
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
 
-  const containerRect = container.getBoundingClientRect();
   const btnRect = btn.getBoundingClientRect();
 
-  const padding = 10;
-  const maxX = Math.max(padding, containerRect.width - btnRect.width - padding);
-  const maxY = Math.max(padding, containerRect.height - btnRect.height - padding);
+  const maxX = Math.max(0, viewportWidth - btnRect.width - padding);
+  const maxY = Math.max(0, viewportHeight - btnRect.height - padding);
 
-  const randomX = Math.floor(Math.random() * maxX);
-  const randomY = Math.floor(Math.random() * maxY);
+  const yesBtn = document.getElementById("yesBtn");
+  const yesRect = yesBtn ? yesBtn.getBoundingClientRect() : null;
 
-  btn.style.position = "absolute";
+  const buffer = 100; // how far away from YES it must stay
+  let randomX = 0;
+  let randomY = 0;
+
+  // Try up to 15 times to find a spot not near YES
+  for (let i = 0; i < 15; i++) {
+    randomX = Math.floor(Math.random() * (maxX + 1));
+    randomY = Math.floor(Math.random() * (maxY + 1));
+
+    if (!yesRect) break;
+
+    const tooClose =
+      randomX > yesRect.left - buffer &&
+      randomX < yesRect.right + buffer &&
+      randomY > yesRect.top - buffer &&
+      randomY < yesRect.bottom + buffer;
+
+    if (!tooClose) break;
+  }
+
+  btn.style.position = "fixed";
   btn.style.left = randomX + "px";
   btn.style.top = randomY + "px";
+  btn.style.zIndex = 999; // stay clickable above background
 }
+

@@ -119,4 +119,20 @@ document.addEventListener("DOMContentLoaded", function () {
     let model2 = document.getElementById("model");
     model2.style.display = "none";
   }
+
+function moveNoButton() {
+  const noBtn = document.getElementById("no");
+
+  const padding = 20;
+  const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+  const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
+
   

@@ -1,29 +1,73 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Get all elements with class "image1"
+  // Random heart positions (your existing thing)
   var images = document.querySelectorAll(".image1");
-
-  // Function to set random position for an element
   function setRandomPosition(element) {
     element.style.top = Math.floor(Math.random() * window.innerHeight) + "px";
     element.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
   }
-
-  // Set random position for each image
   images.forEach(function (image) {
     setRandomPosition(image);
   });
+
+  // Wire up buttons (NO inline onclick attributes needed)
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const yesModalBtn = document.getElementById("yesModalBtn");
+  const noModalBtn = document.getElementById("noModalBtn");
+  const loveYouTooBtn = document.getElementById("loveYouTooBtn");
+
+  if (yesBtn) {
+    yesBtn.addEventListener("mouseenter", happy);
+    yesBtn.addEventListener("mouseleave", normal);
+    yesBtn.addEventListener("click", yes);
+  }
+
+  if (noBtn) {
+    noBtn.addEventListener("mouseenter", function (e) {
+      moveNoButton(e.currentTarget);
+      angry();
+    });
+    noBtn.addEventListener("mouseleave", normal);
+    noBtn.addEventListener("click", function (e) {
+      moveNoButton(e.currentTarget);
+      no();
+    });
+  }
+
+  if (yesModalBtn) {
+    yesModalBtn.addEventListener("mouseenter", happy);
+    yesModalBtn.addEventListener("mouseleave", normal);
+    yesModalBtn.addEventListener("click", yes);
+  }
+
+  if (noModalBtn) {
+    noModalBtn.addEventListener("mouseenter", function (e) {
+      moveNoButton(e.currentTarget);
+      angry();
+    });
+    noModalBtn.addEventListener("mouseleave", normal);
+    noModalBtn.addEventListener("click", function (e) {
+      moveNoButton(e.currentTarget);
+      no();
+    });
+  }
+
+  if (loveYouTooBtn) {
+    loveYouTooBtn.addEventListener("mouseenter", happy);
+    loveYouTooBtn.addEventListener("mouseleave", normal);
+    loveYouTooBtn.addEventListener("click", ly2);
+  }
 });
 
 function angry() {
-  // get all image with class image1 and change the src
   var images = document.querySelectorAll(".image1");
   var absImg = document.getElementById("absImg");
   var mainImg = document.getElementById("mainImg");
-  mainImg.src =
-    "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
-
-  absImg.style.display = "flex";
-
+  if (mainImg) {
+    mainImg.src =
+      "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
+  }
+  if (absImg) absImg.style.display = "flex";
   images.forEach(function (image) {
     image.src =
       "https://github.com/NikhilMarko03/resources/blob/main/sad1.gif?raw=true";
@@ -31,18 +75,28 @@ function angry() {
 }
 
 function happy() {
-  // get all image with class image1 and change the src
   var images = document.querySelectorAll(".image1");
   var absImg = document.getElementById("absImg");
-  absImg.style.display = "flex";
   var mainImg = document.getElementById("mainImg");
-  mainImg.src =
-    "https://github.com/NikhilMarko03/resources/blob/main/happy3.gif?raw=true";
-
+  if (absImg) absImg.style.display = "flex";
+  if (mainImg) {
+    mainImg.src =
+      "https://github.com/NikhilMarko03/resources/blob/main/happy3.gif?raw=true";
+  }
   images.forEach(function (image) {
     image.src =
       "https://github.com/NikhilMarko03/resources/blob/main/heart.gif?raw=true";
   });
+}
+
+function normal() {
+  var absImg = document.getElementById("absImg");
+  var mainImg = document.getElementById("mainImg");
+  if (absImg) absImg.style.display = "none";
+  if (mainImg) {
+    mainImg.src =
+      "https://github.com/NikhilMarko03/resources/blob/main/happy1.gif?raw=true";
+  }
 }
 
 const sadCat = [
@@ -64,30 +118,29 @@ const blackmail = [
   "I'm gonna cry",
 ];
 
-function normal() {
-  var absImg = document.getElementById("absImg");
-  absImg.style.display = "none";
-  var mainImg = document.getElementById("mainImg");
-  mainImg.src =
-    "https://github.com/NikhilMarko03/resources/blob/main/happy1.gif?raw=true";
-}
-
 let counter = 0;
 
 function no() {
   counter++;
   let sadMusic = document.getElementById("sadMusic");
   let happyMusic = document.getElementById("happyMusic");
-  happyMusic.pause();
-  sadMusic.play();
+  if (happyMusic) happyMusic.pause();
+  if (sadMusic) sadMusic.play();
+
   let model = document.getElementById("model");
+  if (!model) return;
+
   model.style.display = "none";
   setTimeout(() => {
     model.style.display = "flex";
     const modelImage = document.getElementById("modelImg");
     const modelText = document.getElementById("modelText");
-    modelImage.src = sadCat[Math.floor(Math.random() * sadCat.length)];
-    modelText.innerText = blackmail[Math.floor(Math.random() * blackmail.length)];
+    if (modelImage) {
+      modelImage.src = sadCat[Math.floor(Math.random() * sadCat.length)];
+    }
+    if (modelText) {
+      modelText.innerText = blackmail[Math.floor(Math.random() * blackmail.length)];
+    }
   }, 100);
 }
 
@@ -96,21 +149,27 @@ function yes() {
     let model = document.getElementById("model2");
     let model2 = document.getElementById("model");
     let sadMusic = document.getElementById("sadMusic");
-    sadMusic.pause();
-    model2.style.display = "none";
+    if (sadMusic) sadMusic.pause();
+    if (model2) model2.style.display = "none";
+
     let happyMusic = document.getElementById("happyMusic");
-    happyMusic.play();
-    model.style.display = "none";
-    setTimeout(() => {
-      model.style.display = "flex";
-    }, 100);
+    if (happyMusic) happyMusic.play();
+
+    if (model) {
+      model.style.display = "none";
+      setTimeout(() => {
+        model.style.display = "flex";
+      }, 100);
+    }
+
     const wedate = document.getElementById("wedate");
     const btns = document.getElementById("btns");
-    btns.style.display = "none";
-    wedate.innerText =
-      "YAYY, Thanks for being my valentine for the past 5 years, and the years to come. I lub you ❤️😘";
+    if (btns) btns.style.display = "none";
+    if (wedate) {
+      wedate.innerText =
+        "YAYY, Thanks for being my valentine for the past 5 years, and the years to come. I lub you ❤️😘";
+    }
 
-    // Open index1.html in a new tab
     window.open("index1.html", "_blank");
   } else {
     alert(
@@ -121,24 +180,19 @@ function yes() {
 
 function ly2() {
   let model = document.getElementById("model2");
-  model.style.display = "none";
   let model2 = document.getElementById("model");
-  model2.style.display = "none";
+  if (model) model.style.display = "none";
+  if (model2) model2.style.display = "none";
 }
 
-/**
- * Moves the "No" button to a random spot inside its container.
- * Works for both the main page No button and the modal No button.
- */
-function moveNoButton() {
-  const btn =
-    document.getElementById("noBtn") || document.getElementById("noModalBtn");
+// Moves whichever No button triggered the event
+function moveNoButton(btn) {
   if (!btn) return;
 
-  // Prefer the main container if it exists; otherwise use the button's parent
+  // try to keep it inside a useful container
   const container = document.getElementById("btns") || btn.parentElement;
 
-  // Ensure container can position children
+  // ensure absolute positioning works
   if (getComputedStyle(container).position === "static") {
     container.style.position = "relative";
   }
